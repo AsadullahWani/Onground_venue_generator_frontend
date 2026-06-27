@@ -34,7 +34,7 @@ export default function VenueFinder() {
 
     try {
       const response = await fetch(
-        "https://52.141.48.77:7000/venues/search/",
+        "http://52.141.48.77:7000/venues/search/",
         {
           method: "POST",
           headers: {
