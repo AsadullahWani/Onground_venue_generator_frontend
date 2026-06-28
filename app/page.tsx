@@ -34,7 +34,11 @@ export default function VenueFinder() {
 
     try {
       const response = await fetch(
+<<<<<<< HEAD
         "https://api02.neuraforgelabs.solutions/venues/search/",
+=======
+        "http://52.141.48.77:7000/venues/search/",
+>>>>>>> 2b78c09c0e9666fd58087caa81a19c3d794ff5d1
         {
           method: "POST",
           headers: {
