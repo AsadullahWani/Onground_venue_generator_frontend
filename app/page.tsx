@@ -25,7 +25,7 @@ export default function VenueFinder() {
   const [venues, setVenues] = useState<Venue[]>([]);
   const [selectedSport, setSelectedSport] = useState("All Sports");
   const [page, setPage] = useState(1);
-  const [maxResults, setMaxResults] = useState(100);
+  const [maxResults, setMaxResults] = useState(10);
 
   async function searchVenues() {
     if (!city) return;
@@ -186,6 +186,9 @@ console.log("isArray:", Array.isArray(venues));
                 onChange={(e) => setMaxResults(Number(e.target.value))}
                 className="bg-slate-800 rounded-xl p-4 outline-none"
               >
+                <option value={5}>5</option>
+
+                <option value={10}>10</option>
                 <option value={25}>25</option>
                 <option value={50}>50</option>
                 <option value={100}>100</option>
