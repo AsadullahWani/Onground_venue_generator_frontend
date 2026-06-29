@@ -35,7 +35,7 @@ export default function VenueFinder() {
     try {
       const response = await fetch(
 
-        "https://api02.neuraforgelabs.solutions/venues/search/",
+        "https://api02.neuraforgelabs.solutions/venues/search",
 
         {
           method: "POST",
