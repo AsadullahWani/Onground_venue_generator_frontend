@@ -17,6 +17,30 @@ type Venue = {
 
 const PAGE_SIZE = 9;
 
+const SPORT_IMAGES: Record<string, string> = {
+  Cricket: "https://images.unsplash.com/photo-1531415074968-036ba1b575da?w=800&q=80",
+  Football: "https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=800&q=80",
+  Soccer: "https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=800&q=80",
+  Swimming: "https://images.unsplash.com/photo-1530549387789-4c1017266635?w=800&q=80",
+  Basketball: "https://images.unsplash.com/photo-1546519638-68e109498ffc?w=800&q=80",
+  Tennis: "https://images.unsplash.com/photo-1554068865-24cecd4e34b8?w=800&q=80",
+  Badminton: "https://images.unsplash.com/photo-1521587765099-08e60d6daab1?w=800&q=80",
+  Gym: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&q=80",
+  Hockey: "https://images.unsplash.com/photo-1580748141549-71748dbe0bdc?w=800&q=80",
+  Golf: "https://images.unsplash.com/photo-1535131749006-b7f58c99034b?w=800&q=80",
+  Volleyball: "https://images.unsplash.com/photo-1592656094267-764a45160876?w=800&q=80",
+  Athletics: "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=800&q=80",
+  Running: "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=800&q=80",
+  "Table Tennis": "https://images.unsplash.com/photo-1611251135345-18c56206b863?w=800&q=80",
+  Skating: "https://images.unsplash.com/photo-1551958219-acbc608c6377?w=800&q=80",
+  "Multi-purpose": "https://images.unsplash.com/photo-1571008887538-b36bb32f4571?w=800&q=80",
+};
+
+function getSportImage(sportType: string): string | undefined {
+  const primarySport = sportType?.split(",")[0]?.trim();
+  return primarySport ? SPORT_IMAGES[primarySport] : undefined;
+}
+
 export default function VenueFinder() {
   const [city, setCity] = useState("");
   const [sport, setSport] = useState("");
@@ -35,7 +59,7 @@ export default function VenueFinder() {
     try {
       const response = await fetch(
 
-        "http://api02.neuraforgelabs.solutions/venues/search",
+        "https://api02.neuraforgelabs.solutions/venues/search",
 
         {
           method: "POST",
@@ -268,7 +292,22 @@ console.log("isArray:", Array.isArray(venues));
                   className="bg-slate-900 border border-slate-800 rounded-3xl overflow-hidden"
                 >
 
-                  <div className="h-52 bg-gradient-to-br from-slate-700 to-slate-900" />
+                  <div className="h-52 relative overflow-hidden">
+                    {(() => {
+                      const imgUrl = getSportImage(venue.ai_sport_type || venue.sport_type);
+                      return imgUrl ? (
+                        <img
+                          src={imgUrl}
+                          alt={venue.ai_sport_type || venue.sport_type}
+                          className="w-full h-full object-cover"
+                          loading="lazy"
+                        />
+                      ) : (
+                        <div className="h-52 bg-gradient-to-br from-slate-700 to-slate-900" />
+                      );
+                    })()}
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/10 to-transparent" />
+                  </div>
 
                   <div className="p-5">
 
